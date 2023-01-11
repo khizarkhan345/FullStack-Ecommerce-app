@@ -118,6 +118,7 @@ function Product(props) {
             <button
               className="btn btn-danger btn-sm m-1"
               style={{ width: "6rem", height: "2.2rem" }}
+              disabled={product[0].stock === 0}
               onClick={() => {
                 setAddToCart(count);
                 console.log("Add to Cart: ", addToCart);
@@ -126,10 +127,14 @@ function Product(props) {
               Add to Cart
             </button>
           </form>
-          <div className="d-flex mt-3">
-            <h5 className="stock-header">Available Quantity:</h5>
-            <p className="stock-title">{product[0].stock}</p>
-          </div>
+          {product[0].stock === 0 ? (
+            <h4 className="text-danger p-2">Out of Stock</h4>
+          ) : (
+            <div className="d-flex mt-3">
+              <h5 className="stock-header">Available Quantity:</h5>
+              <p className="stock-title">{product[0].stock}</p>
+            </div>
+          )}
         </div>
       </div>
       {alert && (
