@@ -1,0 +1,38 @@
+
+.footer {
+    background-color: #f0f7f2;
+}
+
+.row-group {
+    text-align: center;
+}
+.list-group {
+    list-style-type: none;
+}
+
+.list-group, li {
+   cursor: pointer;
+   text-decoration: none;
+}
+
+.Link-cls {
+    text-decoration: none;
+    color: #4f4e4d;
+ }
+
+ .Link-cls:hover {
+    color: #000;
+ }
+ 
+/* @media screen and (max-width: 480px) {
+
+    .footer {
+        display: flex;
+        direction: column;
+    }
+
+    .row-group {
+        display: flex;
+        direction: column;
+    }
+ } */

@@ -1,0 +1,23 @@
+
+
+.product {
+    width: 5rem;
+}
+
+.product-image {
+    height: 12rem;
+}
+
+.product-header {
+    font-size: 15px;
+}
+
+.product-button {
+    width: 5rem;
+    align-self: center;
+}
+
+.product-link {
+    text-decoration: none;
+    color: white;
+}

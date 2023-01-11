@@ -1,0 +1,49 @@
+.product {
+    width: 20rem;
+    margin-right: 0;
+}
+
+.product-image {
+    height: 12rem;
+    width: 20rem;
+}
+
+.product-header {
+    font-size: 15px;
+}
+
+
+.product-button {
+    width: 5rem;
+    align-self: center;
+}
+
+.product-link {
+    text-decoration: none;
+    color: white;
+    
+}
+
+.product-link:hover {
+    color: rgb(241, 227, 227);
+}
+
+@media screen and (min-width: 750px) {
+    .product {
+        width: 13rem;
+    }
+
+    .product-image {
+        width: 13rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .product {
+        width: 14rem;
+    }
+
+    .product-image {
+        width: 14rem;
+    }
+}

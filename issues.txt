@@ -1,0 +1,13 @@
+
+Issues with the application so far.
+
+
+1) When adding a new customer to the DB. It should check whether the customer has already stored in the database 
+by validating the email address since it is unique.
+
+2) When a page is refreshed, the data from DB should be displayed consistently.
+
+3) When a product goes out of stock. The add to cart button should be disabled and out of stock message should
+be displayed. 
+
+

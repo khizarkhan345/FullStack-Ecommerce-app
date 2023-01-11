@@ -1,0 +1,35 @@
+
+.image-gallery {
+    width: 100%;
+    height: auto;
+}
+
+.desc-header {
+    font-size: 30px;
+    color: var(--header);
+}
+
+.stock-header {
+   font-size: 20px;
+   margin-top: 3px;
+   margin-right: 5px;
+   color: var(--header);
+}
+
+.stock-title {
+   font-size: 20px;
+}
+
+.success-text-msg {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 980px) {
+    .image-gallery {
+        width: 85%;
+    }
+}
