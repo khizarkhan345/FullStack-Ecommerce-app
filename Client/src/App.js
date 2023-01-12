@@ -12,6 +12,7 @@ import BottomBar from "./components/Footer/bottomBar";
 import DisplayCartProducts from "./components/Cart/displayCartProducts";
 import Checkout from "./components/Checkout/checkout";
 import CheckoutConfirmation from "./components/Checkout/checkoutConfirmation";
+import Orders from "./components/Orders/Orders";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/cart" element={<DisplayCartProducts />} />
+            <Route path="/orders" element={<Orders />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route
               path="/checkoutConfirmation"

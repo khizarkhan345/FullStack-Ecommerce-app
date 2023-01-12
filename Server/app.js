@@ -50,6 +50,18 @@ app.get("/cart", (req, res) => {
   );
 });
 
+app.get("/getOrders", (req, res) => {
+  db.query(
+    "Select o.custID as custID, o.prodID as prodID, c.name as cName, c.email as cEmail, c.phoneNO as cphoneNo, c.Street as cStreet, c.city as cCity, c.state as cState, c.zipCode as czipCode, o.orderDate as orderDate, p.title as title, o.quantity as quantity from product p, orderproducts o, customer c WHERE o.custID = c.custID AND o.prodID = p.id",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
 app.post("/addToCart", (req, res) => {
   const id = req.body.id;
   const prodID = req.body.prodID;
