@@ -121,6 +121,22 @@ app.post("/contact", (req, res) => {
   });
 });
 
+app.get("/getCustomer/:email", (req, res) => {
+  const customerEmail = req.params.email;
+  console.log(customerEmail);
+  db.query(
+    "SELECT * FROM customer WHERE email=?;",
+    customerEmail,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 app.post("/addCustomer", (req, res) => {
   const custID = req.body.custID;
   const name = req.body.name;
@@ -141,7 +157,7 @@ app.post("/addCustomer", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log("Success");
+        console.log("New Customer Added");
       }
     };
 });

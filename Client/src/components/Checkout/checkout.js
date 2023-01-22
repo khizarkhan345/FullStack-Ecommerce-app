@@ -16,6 +16,8 @@ function Checkout(props) {
   const [state, setState] = useState("");
   const [zip, setZip] = useState();
   const [alert, setAlert] = useState(false);
+  const [flag, setFlag] = useState(false);
+  const [customerID, setCustomerID] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -49,58 +51,102 @@ function Checkout(props) {
     e.preventDefault();
 
     let myuuid = uuidv4();
-
+    const currentDate = new Date();
     //console.log("PHoneNo:", phoneNo);
 
-    Axios.post("http://localhost:3001/addCustomer", {
-      custID: myuuid,
-      name: name,
-      email: email,
-      phoneNo: phoneNo,
-      street: address,
-      city: city,
-      state: state,
-      zipcode: zip,
-    })
-      .then(() => {
-        console.log("Success");
+    console.log("Email to get customer", email);
+    Axios.get(`http://localhost:3001/getCustomer/${email}`)
+      .then((result) => {
+        // console.log("Customer ID", result.data[0].custID);
+        console.log("Result data:", result.data);
+        if (result.data.length > 0) {
+          console.log("Result data:", result.data);
+          setCustomerID(result.data[0].custID);
+          setFlag(true);
+
+          props.cartData.map((data) => {
+            Axios.post("http://localhost:3001/order", {
+              custID: result.data[0].custID,
+              prodID: data.prodID,
+              quantity: data.quantity,
+              orderDate: currentDate,
+            })
+              .then(() => {
+                console.log("Success");
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+
+            Axios.delete(`http://localhost:3001/deleteCart/${data.id}`)
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+
+            props.dispatch(RemoveCartProduct(data.id));
+          });
+        } else {
+          Axios.post("http://localhost:3001/addCustomer", {
+            custID: myuuid,
+            name: name,
+            email: email,
+            phoneNo: phoneNo,
+            street: address,
+            city: city,
+            state: state,
+            zipcode: zip,
+          })
+            .then(() => {
+              console.log("Success");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          props.cartData.map((data) => {
+            Axios.post("http://localhost:3001/order", {
+              custID: myuuid,
+              prodID: data.prodID,
+              quantity: data.quantity,
+              orderDate: currentDate,
+            })
+              .then(() => {
+                console.log("Success");
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+
+            Axios.delete(`http://localhost:3001/deleteCart/${data.id}`)
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+
+            props.dispatch(RemoveCartProduct(data.id));
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
       });
 
-    const currentDate = new Date();
-    props.cartData.map((data) => {
-      Axios.post("http://localhost:3001/order", {
-        custID: myuuid,
-        prodID: data.prodID,
-        quantity: data.quantity,
-        orderDate: currentDate,
-      })
-        .then(() => {
-          console.log("Success");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      setName("");
-      setEmail("");
-      setPhoneNo("");
-      setAddress("");
-      setCity("");
-      setState("");
-      setZip("");
+    //console.log("Flag value", flag);
 
-      setAlert(true);
-      Axios.delete(`http://localhost:3001/deleteCart/${data.id}`)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      props.dispatch(RemoveCartProduct(data.id));
-    });
+    setName("");
+    setEmail("");
+    setPhoneNo("");
+    setAddress("");
+    setCity("");
+    setState("");
+    setZip("");
+
+    setAlert(true);
   };
 
   if (alert) {
